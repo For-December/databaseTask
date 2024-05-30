@@ -7,8 +7,9 @@ package dbmodels
 // FOREIGN KEY (ExecutiveID) REFERENCES Executive(ExecutiveID)
 // FOREIGN KEY (UniversityCode) REFERENCES University(UniversityCode)
 type AlumniAssociation struct {
-	ExecutiveID    uint32     `gorm:"not null;primaryKey;index"`
-	UniversityCode string     `gorm:"not null;type:VARCHAR(10);primaryKey;index"`
-	Executive      Executive  `gorm:"foreignKey:ExecutiveID;references:ExecutiveID"`
-	University     University `gorm:"foreignKey:UniversityCode:references:UniversityCode"`
+	ExecutiveID    uint32 `gorm:"not null;primaryKey;index"`
+	UniversityCode string `gorm:"not null;primaryKey;type:VARCHAR(10);index"`
+
+	Executive  Executive  `gorm:"foreignKey:executive_id"`
+	University University `gorm:"foreignKey:university_code"`
 }

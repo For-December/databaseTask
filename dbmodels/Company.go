@@ -12,7 +12,7 @@ import "time"
 // StockExchange VARCHAR(50)
 // EstablishedDate DATE
 type Company struct {
-	CompanyCode       string    `gorm:"not null;type:VARCHAR(10);primaryKey;index"`
+	CompanyCode       string    `gorm:"not null;primaryKey;type:VARCHAR(10);index"`
 	CompanyName       string    `gorm:"not null;type:VARCHAR(255)"`
 	RegisteredAddress string    `gorm:"not null;type:VARCHAR(255)"`
 	EmployeeCount     uint32    `gorm:"not null"`
@@ -20,4 +20,6 @@ type Company struct {
 	Industry          string    `gorm:"not null;type:VARCHAR(50)"`
 	StockExchange     string    `gorm:"not null;type:VARCHAR(50)"`
 	EstablishedDate   time.Time `gorm:"not null;type:DATE"`
+
+	Executive []Executive `gorm:"foreignKey:CompanyCode"`
 }

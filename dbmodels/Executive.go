@@ -10,12 +10,11 @@ package dbmodels
 // CompanyCode VARCHAR(10)
 // FOREIGN KEY (CompanyCode) REFERENCES Company(CompanyCode)
 type Executive struct {
-	ExecutiveID uint32  `gorm:"not null;primaryKey;index;autoIncrement"`
-	Name        string  `gorm:"not null;type:VARCHAR(50)"`
-	Gender      string  `gorm:"not null;type:VARCHAR(10)"`
-	Age         uint32  `gorm:"not null"`
-	Position    string  `gorm:"not null;type:VARCHAR(50)"`
-	Resume      string  `gorm:"not null;type:TEXT"`
-	CompanyCode string  `gorm:"not null;type:VARCHAR(10)"`
-	Company     Company `gorm:"foreignKey:CompanyCode;references:CompanyCode"`
+	ExecutiveID uint32 `gorm:"not null;primaryKey;index;autoIncrement"`
+	Name        string `gorm:"not null;type:VARCHAR(50)"`
+	Gender      string `gorm:"not null;type:VARCHAR(10)"`
+	Age         uint32 `gorm:"not null"`
+	Position    string `gorm:"not null;type:VARCHAR(50)"`
+	Resume      string `gorm:"not null;type:TEXT"`
+	CompanyCode string `gorm:"not null;index;type:VARCHAR(10)"`
 }
