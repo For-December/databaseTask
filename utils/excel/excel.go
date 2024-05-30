@@ -17,27 +17,6 @@ var usefulCompanyCols = []string{
 }
 
 var companyExcel2Struct = map[string]string{
-	"ORG_CODE":      "CompanyCode",
-	"ORG_NAME":      "CompanyName",
-	"REG_ADDRESS":   "RegisteredAddress",
-	"EMP_NUM":       "EmployeeCount",
-	"REG_CAPITAL":   "RegisteredCapital",
-	"INDUSTRYCSRC1": "Industry",
-	"TRADE_MARKET":  "StockExchange",
-}
-
-func ReadCompany() (resInfos []dbmodels.Company, err error) {
-	return ReadExcel[dbmodels.Company](
-		"resources/上市公司列表.xlsx",
-		usefulCompanyCols, companyExcel2Struct)
-}
-
-var usefulUniversityCols = []string{
-	"ORG_CODE", "ORG_NAME", "REG_ADDRESS",
-	"EMP_NUM", "REG_CAPITAL", "INDUSTRYCSRC1", "TRADE_MARKET",
-}
-
-var universityExcel2Struct = map[string]string{
 	"ORG_CODE":      "OrgCode",
 	"ORG_NAME":      "OrgName",
 	"REG_ADDRESS":   "RegisteredAddress",
@@ -47,6 +26,23 @@ var universityExcel2Struct = map[string]string{
 	"TRADE_MARKET":  "TradeMarket",
 }
 
+func ReadCompany() (resInfos []dbmodels.Company, err error) {
+	return ReadExcel[dbmodels.Company](
+		"resources/上市公司列表.xlsx",
+		usefulCompanyCols, companyExcel2Struct)
+}
+
+var usefulUniversityCols = []string{
+	"序号", "学校名称", "省份", "城市",
+}
+
+var universityExcel2Struct = map[string]string{
+	"序号":   "UniversityID",
+	"学校名称": "UniversityName",
+	"省份":   "Province",
+	"城市":   "City",
+}
+
 func ReadUniversity() (resInfos []dbmodels.University, err error) {
 	return ReadExcel[dbmodels.University](
 		"resources/全国985大学.xlsx",
@@ -54,8 +50,8 @@ func ReadUniversity() (resInfos []dbmodels.University, err error) {
 }
 
 var usefulExecutiveCols = []string{
-	"ORG_CODE", "PERSON_NAME", "SEX",
-	"EMP_NUM", "REG_CAPITAL", "INDUSTRYCSRC1", "TRADE_MARKET",
+	"PERSON_NAME", "SEX", "AGE", "POSITION",
+	"HIGH_DEGREE", "RESUME", "ORG_CODE",
 }
 
 var executiveExcel2Struct = map[string]string{
@@ -115,8 +111,8 @@ func ReadExcel[T dbmodels.Company | dbmodels.University | dbmodels.Executive](
 		}
 	}
 
-	logger.Info(usefulCols)
-	logger.Info(usefulIndex)
+	logger.Warning(usefulCols)
+	logger.Warning(usefulIndex)
 
 	// 保存数据
 	resInfos = make([]T, 0)

@@ -6,6 +6,7 @@ package dbmodels
 // Sex VARCHAR(10)
 // Age INT
 // Position VARCHAR(50)
+// HighDegree VARCHAR(50)
 // Resume TEXT
 // OrgCode VARCHAR(10)
 // FOREIGN KEY (OrgCode) REFERENCES Company(OrgCode)
@@ -15,6 +16,7 @@ type Executive struct {
 	Sex         string `gorm:"not null;type:VARCHAR(10)"`
 	Age         uint32 `gorm:"not null"`
 	Position    string `gorm:"not null;type:VARCHAR(50)"`
+	HighDegree  string `gorm:"not null;type:VARCHAR(50)"`
 	Resume      string `gorm:"not null;type:TEXT"`
 	OrgCode     string `gorm:"not null;index;type:VARCHAR(10)"`
 }
