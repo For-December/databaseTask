@@ -55,13 +55,13 @@ var usefulExecutiveCols = []string{
 }
 
 var executiveExcel2Struct = map[string]string{
-	"ORG_CODE":      "CompanyCode",
-	"PERSON_NAME":   "CompanyName",
-	"REG_ADDRESS":   "RegisteredAddress",
-	"EMP_NUM":       "EmployeeCount",
-	"REG_CAPITAL":   "RegisteredCapital",
-	"INDUSTRYCSRC1": "Industry",
-	"TRADE_MARKET":  "StockExchange",
+	"PERSON_NAME": "Name",
+	"SEX":         "Sex",
+	"AGE":         "Age",
+	"POSITION":    "Position",
+	"HIGH_DEGREE": "HighDegree",
+	"RESUME":      "Resume",
+	"ORG_CODE":    "OrgCode",
 }
 
 func ReadExecutive() (resInfos []dbmodels.Executive, err error) {

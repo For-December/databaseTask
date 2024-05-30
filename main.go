@@ -13,7 +13,7 @@ func main() {
 
 func Test() {
 	println(database.Client.Error)
-	company, err := excel.ReadUniversity()
+	company, err := excel.ReadExecutive()
 	if err != nil {
 		logger.Error(err)
 		return
