@@ -27,7 +27,7 @@ var companyExcel2Struct = map[string]string{
 }
 
 func ReadCompany() (resInfos []dbmodels.Company, err error) {
-	return ReadExcel[dbmodels.Company](
+	return readExcel[dbmodels.Company](
 		"resources/上市公司列表.xlsx",
 		usefulCompanyCols, companyExcel2Struct)
 }
@@ -44,7 +44,7 @@ var universityExcel2Struct = map[string]string{
 }
 
 func ReadUniversity() (resInfos []dbmodels.University, err error) {
-	return ReadExcel[dbmodels.University](
+	return readExcel[dbmodels.University](
 		"resources/全国985大学.xlsx",
 		usefulUniversityCols, universityExcel2Struct)
 }
@@ -65,12 +65,12 @@ var executiveExcel2Struct = map[string]string{
 }
 
 func ReadExecutive() (resInfos []dbmodels.Executive, err error) {
-	return ReadExcel[dbmodels.Executive](
+	return readExcel[dbmodels.Executive](
 		"resources/所有高管.xlsx",
 		usefulExecutiveCols, executiveExcel2Struct)
 }
 
-func ReadExcel[T dbmodels.Company | dbmodels.University | dbmodels.Executive](
+func readExcel[T dbmodels.Company | dbmodels.University | dbmodels.Executive](
 	filePath string,
 	usefulCols []string,
 	excel2Struct map[string]string,
