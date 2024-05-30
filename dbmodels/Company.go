@@ -21,5 +21,6 @@ type Company struct {
 	StockExchange     string    `gorm:"not null;type:VARCHAR(50)"`
 	EstablishedDate   time.Time `gorm:"not null;type:DATE"`
 
+	// has many 关系
 	Executive []Executive `gorm:"foreignKey:CompanyCode"`
 }
