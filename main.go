@@ -7,12 +7,16 @@ import (
 )
 
 func main() {
+	Test()
+	return
+}
+
+func Test() {
 	println(database.Client.Error)
-	company, err := excel.ReadCompany()
+	company, err := excel.ReadUniversity()
 	if err != nil {
 		logger.Error(err)
 		return
 	}
 	logger.Info(len(company))
-	return
 }

@@ -32,7 +32,49 @@ func ReadCompany() (resInfos []dbmodels.Company, err error) {
 		usefulCompanyCols, companyExcel2Struct)
 }
 
-func ReadExcel[T dbmodels.Company](
+var usefulUniversityCols = []string{
+	"ORG_CODE", "ORG_NAME", "REG_ADDRESS",
+	"EMP_NUM", "REG_CAPITAL", "INDUSTRYCSRC1", "TRADE_MARKET",
+}
+
+var universityExcel2Struct = map[string]string{
+	"ORG_CODE":      "OrgCode",
+	"ORG_NAME":      "OrgName",
+	"REG_ADDRESS":   "RegisteredAddress",
+	"EMP_NUM":       "EmployeeCount",
+	"REG_CAPITAL":   "RegisteredCapital",
+	"INDUSTRYCSRC1": "Industry",
+	"TRADE_MARKET":  "TradeMarket",
+}
+
+func ReadUniversity() (resInfos []dbmodels.University, err error) {
+	return ReadExcel[dbmodels.University](
+		"resources/全国985大学.xlsx",
+		usefulUniversityCols, universityExcel2Struct)
+}
+
+var usefulExecutiveCols = []string{
+	"ORG_CODE", "PERSON_NAME", "SEX",
+	"EMP_NUM", "REG_CAPITAL", "INDUSTRYCSRC1", "TRADE_MARKET",
+}
+
+var executiveExcel2Struct = map[string]string{
+	"ORG_CODE":      "CompanyCode",
+	"PERSON_NAME":   "CompanyName",
+	"REG_ADDRESS":   "RegisteredAddress",
+	"EMP_NUM":       "EmployeeCount",
+	"REG_CAPITAL":   "RegisteredCapital",
+	"INDUSTRYCSRC1": "Industry",
+	"TRADE_MARKET":  "StockExchange",
+}
+
+func ReadExecutive() (resInfos []dbmodels.Executive, err error) {
+	return ReadExcel[dbmodels.Executive](
+		"resources/所有高管.xlsx",
+		usefulExecutiveCols, executiveExcel2Struct)
+}
+
+func ReadExcel[T dbmodels.Company | dbmodels.University | dbmodels.Executive](
 	filePath string,
 	usefulCols []string,
 	excel2Struct map[string]string,
@@ -83,7 +125,10 @@ func ReadExcel[T dbmodels.Company](
 	for _, row := range rows[1:] {
 
 		// 反射创建结构体来记录每一行的数据
-		resInfo := reflect.New(reflect.TypeOf(T{})).Elem()
+		// 直接 TypeOf(T) 无法通过编译，因此这里用 new(T) 来获取类型
+		// 由于指定了多个泛型、无法确定结构体所占空间大小?
+		// 参见 -> https://go.dev/doc/tutorial/generics
+		resInfo := reflect.New(reflect.TypeOf(*new(T))).Elem()
 
 		for j, colCell := range row {
 			if !calc.IsTargetInArray[int](j, usefulIndex) {
