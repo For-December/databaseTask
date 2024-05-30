@@ -153,7 +153,7 @@ func readExcel[T dbmodels.Company | dbmodels.University | dbmodels.Executive](
 			}
 
 		}
-		logger.Info(resInfo.Interface())
+		//logger.Info(resInfo.Interface())
 
 		// 只保存这一行需要的数据，并添加到结果数组
 		resInfos = append(resInfos, resInfo.Interface().(T))

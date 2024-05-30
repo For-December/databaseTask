@@ -11,8 +11,8 @@ WHERE employee_count > 500;
 const Task2 = `
 SELECT e.*
 FROM executives e
-JOIN companies c ON e.org_code = c.org_name
-WHERE c.org_code = '星光农机';
+JOIN companies c ON e.org_code = c.org_code
+WHERE c.org_name LIKE '%星光农机%';
 `
 
 // Task3 （3）查询注册地址在湖北和湖南的所有上市公司

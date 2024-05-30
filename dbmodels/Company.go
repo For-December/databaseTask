@@ -1,7 +1,8 @@
 package dbmodels
 
 // Company 上市公司基本信息
-// OrgCode VARCHAR(10) PRIMARY KEY 公司代码
+// CompanyID INT PRIMARY KEY AUTO_INCREMENT
+// OrgCode VARCHAR(20) PRIMARY KEY 公司代码
 // OrgName VARCHAR(100) 公司名称
 // RegisteredAddress VARCHAR(200) 注册地址
 // EmployeeCount INT 员工人数
@@ -9,7 +10,8 @@ package dbmodels
 // Industry VARCHAR(50) 行业
 // TradeMarket VARCHAR(50) 交易所
 type Company struct {
-	OrgCode           string  `gorm:"not null;primaryKey;type:VARCHAR(10);index"`
+	CompanyID         uint32  `gorm:"not null;primaryKey;autoIncrement"`
+	OrgCode           string  `gorm:"not null;primaryKey;type:VARCHAR(20);index"`
 	OrgName           string  `gorm:"not null;type:VARCHAR(255)"`
 	RegisteredAddress string  `gorm:"not null;type:VARCHAR(255)"`
 	EmployeeCount     uint32  `gorm:"not null"`
@@ -18,5 +20,5 @@ type Company struct {
 	TradeMarket       string  `gorm:"not null;type:VARCHAR(50)"`
 
 	// has many 关系
-	Executive []Executive `gorm:"foreignKey:OrgCode"`
+	Executive []Executive `gorm:"foreignKey:OrgCode;references:OrgCode"`
 }
