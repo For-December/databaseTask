@@ -9,8 +9,8 @@ import (
 func main() {
 	// 从excel文件中读取数据，写入数据库
 	//InitDatabase()
-	//Task2()
-	Test()
+	Task1()
+	//Test()
 }
 
 func InitDatabase() {

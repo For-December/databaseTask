@@ -8,6 +8,7 @@ import (
 )
 
 func Task1() {
+	logger.Debug("########## TASK1 ##########")
 	type T struct {
 		OrgCode           string `json:"orgCode"`
 		OrgName           string `json:"orgName"`
@@ -19,7 +20,10 @@ func Task1() {
 		logger.Error(err)
 		return
 	}
-	logger.Info(len(res))
+	logger.InfoF("一共 %d 条数据", len(res))
+
+	logger.Debug("########## END ##########")
+
 	return
 }
 
