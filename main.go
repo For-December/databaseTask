@@ -10,6 +10,9 @@ func main() {
 	// 从excel文件中读取数据，写入数据库
 	//InitDatabase()
 	Task1()
+	Task3()
+	// 其他Task参见tasks.go
+
 	//Test()
 }
 
