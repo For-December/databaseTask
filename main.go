@@ -9,7 +9,8 @@ import (
 func main() {
 	// 从excel文件中读取数据，写入数据库
 	//InitDatabase()
-	Task2()
+	//Task2()
+	Test()
 }
 
 func InitDatabase() {
@@ -65,10 +66,25 @@ func InitDatabase() {
 
 func Test() {
 	println(database.Client.Error)
+
+	companies, err := excel.ReadCompany()
+	if err != nil {
+		logger.Error(err)
+		return
+	}
+	logger.InfoF("%v 共有%d条数据", "companies", len(companies))
+
 	executives, err := excel.ReadExecutive()
 	if err != nil {
 		logger.Error(err)
 		return
 	}
-	logger.InfoF("共有%d条数据", len(executives))
+	logger.InfoF("%v 共有%d条数据", "executives", len(executives))
+
+	universities, err := excel.ReadUniversity()
+	if err != nil {
+		logger.Error(err)
+		return
+	}
+	logger.InfoF("%v 共有%d条数据", "universities", len(universities))
 }

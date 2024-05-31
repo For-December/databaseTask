@@ -65,7 +65,7 @@ FROM executives e
 JOIN alumni_associations a ON e.executive_id = a.executive_id
 JOIN universities u ON a.university_id = u.university_id
 JOIN companies c ON e.org_code = c.org_code
-WHERE u.university_id = '武汉大学';
+WHERE u.university_name = '武汉大学';
 `
 
 // Task9 （9）查询所有高管来自于“武汉大学”校友的公司列表
@@ -75,7 +75,7 @@ FROM executives e
 JOIN alumni_associations a ON e.executive_id = a.executive_id
 JOIN universities u ON a.university_id = u.university_id
 JOIN companies c ON e.org_code = c.org_code
-WHERE u.university_id = '武汉大学';
+WHERE u.university_name = '武汉大学';
 `
 
 // Task10 （10）查询每一所学校的校友的高管列表以及其所属公司代码、公司名称
@@ -93,7 +93,7 @@ const Task11 = `
 INSERT INTO alumni_associations (executive_id, university_id)
 SELECT e.executive_id, u.university_id
 FROM executives e
-JOIN universities u ON e.resume LIKE CONCAT('%', u.university_id, '%');
+JOIN universities u ON e.resume LIKE CONCAT('%', u.university_name, '%');
 `
 
 // Task12 （12）查询武汉大学的所有高管校友列表
